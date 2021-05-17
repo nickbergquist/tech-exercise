@@ -1,0 +1,48 @@
+﻿
+body {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box; // not inherited by default
+}
+
+* {
+  &,
+  &::before,
+  &::after {
+    box-sizing: inherit; // apply desired box model to all but allowing local change
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+blockquote,
+dd,
+dl,
+dt,
+fieldset,
+figure,
+legend,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+[type='submit'] {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+img {
+  border: 0;
+  height: auto;
+  max-width: 100%;
+}

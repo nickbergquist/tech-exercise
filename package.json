@@ -1,0 +1,21 @@
+{
+  "name": "mps_tech_exercise",
+  "version": "1.0.0",
+  "description": "Technical exercise",
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "author": "Nick Bergquist",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-dom": "^1.9.0",
+    "karma": "^6.3.2",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-cli": "^2.0.0",
+    "karma-mocha": "^2.0.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "mocha": "^8.4.0"
+  }
+}

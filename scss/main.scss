@@ -1,0 +1,8 @@
+// helpers or utilities - mixins, functions, config., etc.
+@import 'utils/module';
+
+// base, common styles for all pages
+@import 'base/module';
+
+// micro layout styles - page components
+@import 'components/module';
