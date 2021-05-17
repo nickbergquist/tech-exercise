@@ -2,6 +2,8 @@
 
 Clone this repo. then run:
 
-`$ npm install`
+Install dependencies: `$ npm install`
 
-`$ npm test`
+Run Mocha/Chai tests via Karma: `$ npm test`
+
+Load the HTML file in Chrome: index.html
