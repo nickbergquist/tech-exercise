@@ -1,3 +1,28 @@
 ﻿.tabs {
-  color: rebeccapurple;
+  margin-bottom: 2rem;
+}
+
+.tabs-list {
+  display: flex;
+  margin-bottom: 1rem;
+
+  li {
+    list-style: none;
+    margin-right: 15px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      border-radius: 10px;
+      display: inline-block;
+      padding: 10px 15px;
+    }
+
+    &.active a {
+      background: palette-colour(main, 'secondary');
+      color: palette-colour(mono, 'offwhite');
+    }
+  }
 }
