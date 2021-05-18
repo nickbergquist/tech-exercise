@@ -1,3 +1,4 @@
+
 var sectionedContentComponent = {
     // return the main container element
     getSections: function() {
@@ -49,13 +50,11 @@ var sectionedContentComponent = {
                 eleListItem.classList.add('active');
 
                 eleAnchor.setAttribute('aria-selected', 'true');
-                eleAnchor.setAttribute('tabindex', '0');
 
                 section.setAttribute('aria-hidden', 'false');
                 section.style.display = 'block';
             } else {
                 eleAnchor.setAttribute('aria-selected', 'false');
-                eleAnchor.setAttribute('tabindex', '-1');
 
                 section.setAttribute('aria-hidden', 'true');
                 section.style.display = 'none';
@@ -68,6 +67,51 @@ var sectionedContentComponent = {
 
         // append the new navigation tabs
         eleSections.insertAdjacentElement('afterbegin', eleList);
+    },
+
+    // add event handlers for tabs
+    bindTabsEvents: function(eleSections) {
+        var $_ = this;
+        var elesAnchorsTabsList = eleSections.querySelectorAll('.tabs-list a');
+
+        if(elesAnchorsTabsList.length) {
+            elesAnchorsTabsList.forEach(function(eleAnchor) {
+                eleAnchor.sectionsRef = eleSections;
+                eleAnchor.addEventListener('click', $_.changePanelView);
+            });
+        }
+    },
+
+    // switch active panel
+    changePanelView: function(e) {
+        var eleThisAnchor = e.target;
+        var eleSections = e.currentTarget.sectionsRef;
+        var elesAnchorsTabsList = eleSections.querySelectorAll('.tabs-list a');
+        var elesSections = eleSections.querySelectorAll('section');
+
+        // reset the tabs list anchors
+        elesAnchorsTabsList.forEach(function(eleAnchor) {
+            eleAnchor.setAttribute('aria-selected', 'false');
+            eleAnchor.parentNode.classList.remove('active');
+        });
+
+        // set the current selected tabs list anchor
+        eleThisAnchor.setAttribute('aria-selected', 'true');
+        eleThisAnchor.parentNode.classList.add('active');
+
+        // reset the tab panels visibility
+        elesSections.forEach(function(eleSection) {
+            eleSection.setAttribute('aria-hidden', 'true');
+            eleSection.style.display = 'none';
+
+            // show the selected tabs panel
+            if(eleSection.getAttribute('aria-labelledby') === eleThisAnchor.id) {
+                eleSection.setAttribute('aria-hidden', 'false');
+                eleSection.style.display = 'block';
+            }
+        });
+
+        e.preventDefault();
     },
 
     // modify the DOM to remove the tab menu structure at smaller viewport widths 
@@ -97,6 +141,7 @@ var sectionedContentComponent = {
 
                 // build tabs structure
                 $_.buildTabs(eleSections);
+                $_.bindTabsEvents(eleSections);
             }
             else {
                 eleSections.classList.add('accordion');
@@ -114,6 +159,7 @@ var sectionedContentComponent = {
                     // build tabs structure
                     if (!document.querySelector('.tabs-list')) {
                         $_.buildTabs(eleSections);
+                        $_.bindTabsEvents(eleSections);
                     }
                 }
                 else {
@@ -135,3 +181,4 @@ var sectionedContentComponent = {
 window.addEventListener('DOMContentLoaded', function() {
     sectionedContentComponent.init();
 });
+
